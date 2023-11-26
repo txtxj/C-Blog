@@ -78,6 +78,7 @@ onMounted(() => {
 	height: 328px;
 }
 .n-layout-content .n-card {
+	transition: background-color 0.3s;
 	background-blend-mode: darken;
 	background-color: rgba(0, 0, 0, 0.4);
 }
@@ -86,13 +87,13 @@ onMounted(() => {
 	background-color: rgba(0, 0, 0, 0.25);
 }
 .n-layout-content a.n-card-small {
-	flex: 1 1 33%;
+	flex: 1 1 30%;
 }
 .n-layout-content a.n-card-medium {
-	flex: 1 1 50%;
+	flex: 1 1 40%;
 }
 .n-layout-content a.n-card-large {
-	flex: 1 1 66%;
+	flex: 1 1 50%;
 }
 .n-layout-content a.n-card-small,
 .n-layout-content a.n-card-medium,
