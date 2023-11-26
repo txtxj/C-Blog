@@ -15,7 +15,7 @@ const menuOptions = [
 		match: '/about$',
 	},
 	{
-		label: '友链123456',
+		label: '友链',
 		to: 'link',
 		match: '/link$',
 	},
@@ -82,7 +82,8 @@ watch([routePath, outLiner], () => {
 		</div>
 		<div class="inline-flex">
 			<p
-				class="relative px-5 rounded-lg outline outline-amber-200 outline-2 pointer-events-none"
+				class="relative px-5 rounded-lg outline outline-amber-200 outline-2 bg-amber-200 pointer-events-none"
+				style="z-index: -1"
 				ref="outLiner"
 			></p>
 			<RouterLink

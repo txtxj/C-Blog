@@ -12,7 +12,18 @@ const posts = computed(() => {
 		.slice((page.value - 1) * 10, page.value * 10)
 })
 
-onMounted(() => useDataClickable('.n-pagination-item'))
+onMounted(() =>
+	useDataClickable('.n-pagination-item, .n-scrollbar-rail__scrollbar'),
+)
+
+onMounted(() => {
+	let scrollbarContents = Array.from(document.querySelectorAll('.n-scrollbar'))
+	for (let c of scrollbarContents) {
+		;(c as HTMLInputElement).addEventListener('mouseenter', (e: Event) => {
+			useDataClickable('.n-scrollbar-rail__scrollbar', e.target as ParentNode)
+		})
+	}
+})
 </script>
 
 <template>
