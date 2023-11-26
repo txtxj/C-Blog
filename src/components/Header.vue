@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import gsap from 'gsap'
+import { ComponentPublicInstance } from 'vue'
 
 const menuOptions = [
 	{
@@ -24,7 +25,7 @@ const router = useRouter()
 const routePath = toRef(useRoute(), 'path')
 
 const outLiner = ref<HTMLInputElement | null>(null)
-const routerLinks = ref<{ $el: HTMLInputElement }[]>([])
+const routerLinks = ref<ComponentPublicInstance[]>([])
 
 watch([routePath, outLiner], () => {
 	let target = null
@@ -55,7 +56,7 @@ watch([routePath, outLiner], () => {
 <template>
 	<n-card
 		class="w-auto m-1 rounded-4 sticky top-1"
-		style="background-color: rgba(255, 113, 0, 0.02)"
+		style="--n-color-embedded: rgba(255, 113, 0, 0.02)"
 		content-style="display:flex;align-items:center;justify-content:space-between;"
 		tag="div"
 		embedded
@@ -73,7 +74,11 @@ watch([routePath, outLiner], () => {
 				class="py-5"
 				style="background-color: rgba(243, 169, 184, 0.5)"
 			/>
-			<Typewriter class="mt-1 pl-2 text-0.9em text-gray">A</Typewriter>
+			<Typewriter
+				class="mt-1 pl-2 text-0.9em text-gray"
+				prefix="A"
+				:strings="[' Programmer', 'n Engineer', ' Gamer', 'n ACG Lover']"
+			></Typewriter>
 		</div>
 		<div class="inline-flex">
 			<p

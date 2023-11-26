@@ -2,31 +2,25 @@
 import TypeIt from 'typeit'
 
 const text = ref(null)
+const props = defineProps(['prefix', 'strings'])
 onMounted(() => {
 	new TypeIt(text.value, {
-		cursorChar: "<span class='cursorChar'>|<span>", //用于光标的字符。HTML也可以
+		cursorChar: "<span class='cursorChar'>|<span>",
 		speed: 150,
-		cursor: true, //在字符串末尾显示闪烁的光标
-		breakLines: false, // 控制是将多个字符串打印在彼此之上，还是删除这些字符串并相互替换
-		loop: true, //是否循环
+		cursor: true,
+		breakLines: false,
+		loop: true,
 		startDelete: false,
-	})
-		.type(' Programmer')
-		.pause(1000)
-		.delete(10)
-		.type('Gamer')
-		.pause(1000)
-		.delete(6)
-		.type('n ACG Lover')
-		.pause(1000)
-		.delete(11)
-		.go()
+		strings: props.strings,
+		startDelay: 1500,
+		nextStringDelay: 1500,
+	}).go()
 })
 </script>
 
 <template>
 	<p>
-		<span><slot></slot></span>
+		<span>{{ props.prefix }}</span>
 		<span ref="text"></span>
 	</p>
 </template>

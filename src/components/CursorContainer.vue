@@ -29,8 +29,8 @@ watch(click, () => {
 	if (!click.value || cursorEffect.value === null) return
 	let target = cursorEffect.value as HTMLInputElement
 	target.style.opacity = '1'
-	target.style.width = '24px'
-	target.style.height = '24px'
+	target.style.width = '32px'
+	target.style.height = '32px'
 	target.style.left = x.value + 'px'
 	target.style.top = y.value + 'px'
 	gsap.to(target, {

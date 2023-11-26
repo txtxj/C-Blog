@@ -316,6 +316,7 @@
     "usePhone": true,
     "useDarks": true,
     "usePage": true,
-    "useMouseHover": true
+    "useMouseHover": true,
+    "useDataClickable": true
   }
 }

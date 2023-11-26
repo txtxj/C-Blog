@@ -7,11 +7,39 @@ const { page } = usePage()
 watch([routePath, page], () => {
 	contentRef.value?.scrollTo(0, 0)
 })
+
+onMounted(() => useDataClickable('.n-layout-toggle-button'))
 </script>
 
 <template>
 	<Header />
-	<RouterView></RouterView>
+	<n-layout
+		style="height: calc(100vh - 110px)"
+		has-sider
+		sider-placement="right"
+	>
+		<n-layout-content
+			ref="contentRef"
+			:native-scrollbar="false"
+			content-style="padding: 0 24px;min-width: 340px;overflow: hidden;"
+		>
+			<main
+				class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200"
+				style="display: flex; flex-direction: row; flex-wrap: wrap"
+			>
+				<RouterView />
+			</main>
+		</n-layout-content>
+		<n-layout-sider
+			content-style="padding: 24px;"
+			:collapsed-width="14"
+			:width="320"
+			:native-scrollbar="false"
+			show-trigger="arrow-circle"
+			bordered
+		>
+		</n-layout-sider>
+	</n-layout>
 </template>
 
 <style></style>
