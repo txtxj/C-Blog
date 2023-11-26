@@ -42,4 +42,12 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 	</n-layout>
 </template>
 
-<style></style>
+<style>
+.n-scrollbar-rail > .n-scrollbar-rail__scrollbar {
+	background: linear-gradient(
+		rgba(204, 255, 255, 0.8),
+		rgba(255, 255, 204, 0.8),
+		rgba(255, 204, 255, 0.8)
+	);
+}
+</style>

@@ -16,7 +16,7 @@ html.dark {
 #nprogress .bar {
 	@apply bg-blue-700 bg-opacity-75;
 
-	background: repeating-linear-gradient(90deg, #5acdf8, #fdfdfd 50%, #f3a9b8);
+	background: repeating-linear-gradient(90deg, #ccffff, #ffffff 50%, #ffccff);
 	position: fixed;
 	z-index: 1031;
 	top: 0;
