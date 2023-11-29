@@ -38,6 +38,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			show-trigger="arrow-circle"
 			bordered
 		>
+			<SideBar />
 		</n-layout-sider>
 	</n-layout>
 </template>

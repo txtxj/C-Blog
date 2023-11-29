@@ -10,6 +10,11 @@ const menuOptions = [
 		match: '/$',
 	},
 	{
+		label: '标签',
+		to: 'tags',
+		match: '/tags$',
+	},
+	{
 		label: '关于',
 		to: 'about',
 		match: '/about$',

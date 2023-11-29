@@ -317,6 +317,7 @@
     "useDarks": true,
     "usePage": true,
     "useMouseHover": true,
-    "useDataClickable": true
+    "useDataClickable": true,
+    "useMousePosAndEvent": true
   }
 }

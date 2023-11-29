@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    APlayer: typeof import('./../../src/components/APlayer.vue')['default']
     CursorContainer: typeof import('./../../src/components/CursorContainer.vue')['default']
     Header: typeof import('./../../src/components/Header.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
@@ -17,8 +18,10 @@ declare module 'vue' {
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NPageHeader: typeof import('naive-ui')['NPageHeader']
     NPagination: typeof import('naive-ui')['NPagination']
+    PostCard: typeof import('./../../src/components/PostCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SideBar: typeof import('./../../src/components/SideBar.vue')['default']
     Typewriter: typeof import('./../../src/components/Typewriter.vue')['default']
   }
 }

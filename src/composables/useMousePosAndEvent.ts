@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-export function useMouse() {
+export function useMousePosAndEvent() {
 	const x = ref(0)
 	const y = ref(0)
 	const hover = ref(false)

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import gsap from 'gsap'
+import { useMousePosAndEvent } from '~/composables/useMousePosAndEvent'
 
 const cursorEffect = ref<HTMLInputElement | null>(null)
-const { x, y, hover, click, consumeClick } = useMouse()
+const { x, y, hover, click, consumeClick } = useMousePosAndEvent()
 const cursorOuterPos = ref<{ left: number; top: number }>({ left: 0, top: 0 })
 const cursorOuterPosPx = computed(() => ({
 	left: cursorOuterPos.value.left + 'px',
