@@ -8,7 +8,8 @@ interface ImportMetaEnv {
 	readonly VITE_APP_MOCK_IN_PRODUCTION: string
 	readonly VITE_APP_COMPRESSINON_ALGORITHM: string
 	readonly VITE_APP_API_AUTO_IMPORT: string
-	readonly VITE_APP_DIR_API_AUTO_IMPORT: string 
+	readonly VITE_APP_DIR_API_AUTO_IMPORT: string
+	readonly VITE_CJS_IGNORE_WARNING: string 
 }
 
 interface ImportMeta {
