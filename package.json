@@ -25,6 +25,8 @@
   },
   "packageManager": "pnpm@8.10.5",
   "devDependencies": {
+    "@iconify-json/ant-design": "^1.1.1",
+    "@iconify-json/grommet-icons": "^1.1.9",
     "@intlify/unplugin-vue-i18n": "^1.5.0",
     "@types/ityped": "^1.0.3",
     "@types/node": "^18.18.10",
@@ -69,6 +71,7 @@
     "typescript": "^5.2.2",
     "unocss": "^0.57.6",
     "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.13.4",
     "unplugin-vue-components": "^0.25.2",
     "unplugin-vue-markdown": "^0.25.2",
     "unplugin-vue-router": "^0.7.0",
@@ -123,6 +126,8 @@
     "iOS >= 8"
   ],
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "~4.0.7",
     "antd": "^5.11.5",
     "gsap": "^3.12.2",
     "typeit": "^8.7.1"

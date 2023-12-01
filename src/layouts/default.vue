@@ -21,7 +21,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 		<n-layout-content
 			ref="contentRef"
 			:native-scrollbar="false"
-			content-style="padding: 0 24px;min-width: 340px;overflow: hidden;"
+			content-style="padding: 0 24px;min-width: 600px;overflow: hidden;"
 		>
 			<main
 				class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200"
@@ -38,7 +38,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			show-trigger="arrow-circle"
 			bordered
 		>
-			<SideBar />
+			<SideBar :enable-toc="true" />
 		</n-layout-sider>
 	</n-layout>
 </template>

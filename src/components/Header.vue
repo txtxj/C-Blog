@@ -64,7 +64,6 @@ watch([routePath, outLiner], () => {
 		style="--n-color-embedded: rgba(255, 113, 0, 0.02)"
 		content-style="display:flex;align-items:center;justify-content:space-between;"
 		tag="div"
-		embedded
 	>
 		<div class="flex items-center" @click="router.push('/')" data-clickable>
 			<img

@@ -1,15 +1,33 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { GithubFilled, CheckOutlined } from '@ant-design/icons-vue'
+const props = defineProps(['enableToc'])
+
+const innerEnableToc = ref<Boolean>(false)
+
+onMounted(() => {
+	innerEnableToc.value = !!props.enableToc
+})
+</script>
 
 <template>
-	<div>
-		<n-card class="mt-6 text-center">
+	<TransitionGroup name="side-bar" tag="div">
+		<Toc v-if="innerEnableToc" key="toc" />
+		<n-card class="mt-6 text-center" key="blogInfo">
 			<a
-				class="m-0.5 inline-block"
+				class="m-1 inline-block"
 				href="https://github.com/txtxj"
 				target="_blank"
+				data-clickable
 			>
-				<i-ant-design:github-filled style="font-size: xx-large" />
+				<GithubFilled style="font-size: xx-large" />
 			</a>
+			<div
+				class="m-1 inline-block"
+				@click="innerEnableToc = !innerEnableToc"
+				data-clickable
+			>
+				<CheckOutlined style="font-size: xx-large" />
+			</div>
 			<p class="mt-3">Copyright © 2023 Citrine</p>
 			<p>
 				License:
@@ -32,7 +50,23 @@
 				>
 			</p>
 		</n-card>
-	</div>
+	</TransitionGroup>
 </template>
 
-<style scoped></style>
+<style scoped>
+.side-bar-move,
+.side-bar-enter-active,
+.side-bar-leave-active {
+	transition: all 0.5s ease;
+}
+
+.side-bar-enter-from,
+.side-bar-leave-to {
+	opacity: 0;
+	transform: translateY(-150%);
+}
+
+.side-bar-leave-active {
+	position: absolute;
+}
+</style>
