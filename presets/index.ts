@@ -40,6 +40,7 @@ import Modules from 'vite-plugin-use-modules'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-meta-layouts'
 import { warmup as Warmup } from 'vite-plugin-warmup'
+import Pages from 'vite-plugin-pages'
 
 import I18N from '@intlify/unplugin-vue-i18n/vite'
 import Legacy from '@vitejs/plugin-legacy'
@@ -193,6 +194,10 @@ export default function () {
 		 * 如果 package.json 或 pnpm-lock.yaml 更新的话，强制重启
 		 */
 		ForceRestart(),
+
+		Pages({
+			extensions: ['vue', 'md'],
+		}),
 	]
 
 	if (env.VITE_APP_API_AUTO_IMPORT) {

@@ -11,17 +11,17 @@ const menuOptions = [
 	},
 	{
 		label: '标签',
-		to: 'tags',
+		to: '/tags',
 		match: '/tags$',
 	},
 	{
 		label: '关于',
-		to: 'about',
+		to: '/about',
 		match: '/about$',
 	},
 	{
 		label: '友链',
-		to: 'link',
+		to: '/link',
 		match: '/link$',
 	},
 ]
@@ -33,13 +33,20 @@ const outLiner = ref<HTMLInputElement | null>(null)
 const routerLinks = ref<ComponentPublicInstance[]>([])
 
 watch([routePath, outLiner], () => {
+	if (outLiner.value === null) return
 	let target = null
 	for (let routerLink of routerLinks.value) {
 		if (routePath.value.match(routerLink.$el.dataset.matches as string)) {
 			target = routerLink.$el
 		}
 	}
-	if (outLiner.value === null || target === null) return
+	if (target === null) {
+		gsap.to(outLiner.value, {
+			duration: 0.2,
+			opacity: 0,
+		})
+		return
+	}
 	gsap.to(outLiner.value, {
 		duration: 0.2,
 		left:
@@ -53,6 +60,7 @@ watch([routePath, outLiner], () => {
 					: outLiner.value.style.width,
 			),
 		width: target.clientWidth,
+		opacity: 1,
 		ease: 'back.out',
 	})
 })

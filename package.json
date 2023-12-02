@@ -130,6 +130,7 @@
     "ant-design-vue": "~4.0.7",
     "antd": "^5.11.5",
     "gsap": "^3.12.2",
-    "typeit": "^8.7.1"
+    "typeit": "^8.7.1",
+    "vite-plugin-pages": "^0.32.0"
   }
 }

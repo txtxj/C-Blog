@@ -23,10 +23,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			:native-scrollbar="false"
 			content-style="padding: 0 24px;min-width: 600px;overflow: hidden;"
 		>
-			<main
-				class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200"
-				style="display: flex; flex-direction: row; flex-wrap: wrap"
-			>
+			<main class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200">
 				<RouterView />
 			</main>
 		</n-layout-content>
