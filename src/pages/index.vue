@@ -1,11 +1,10 @@
 <script setup lang="ts">
-const { data } = useFetch('/page.json').json()
 const summary = useSummary()
 const { page, pageMax } = usePage()
 const posts = computed(() => {
-	const currSummary = data.value ?? Array(summary.value.length).fill('')
+	const currSummary = summary.value
 	return currSummary
-		.map((detail: string, i: number) => ({
+		.map((detail: any, i: number) => ({
 			detail,
 			summary: summary.value[i],
 		}))
@@ -28,7 +27,7 @@ onMounted(() => {
 
 <template>
 	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
-		<PostCard v-for="post in posts" :key="post" :post="post" />
+		<PostCard v-for="post in posts" :key="post.summary.url" :post="post" />
 		<div class="my-10 w-100vw flex" style="justify-content: center">
 			<n-pagination v-model:page="page" :page-count="pageMax" />
 		</div>

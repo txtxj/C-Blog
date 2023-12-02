@@ -15,6 +15,18 @@ const title = computed(() => {
 	return `${currPost.value.title} | Citrineのblog`
 })
 useTitle(title)
+
+onMounted(() => {
+	let scrollbarContents = Array.from(
+		document.querySelectorAll('.n-scrollbar-rail'),
+	)
+	for (let c of scrollbarContents) {
+		;(c as HTMLInputElement).addEventListener('mouseenter', (e: Event) => {
+			useDataClickable('.n-scrollbar-rail__scrollbar', e.target as ParentNode)
+		})
+	}
+})
+
 onBeforeUnmount(() => {
 	if (document) document.title = 'Citrineのblog'
 })

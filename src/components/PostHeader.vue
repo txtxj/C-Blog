@@ -14,13 +14,14 @@ const props = defineProps<{
 			<n-tag
 				v-for="tag in post.tags"
 				:key="tag"
-				class="mr-2 mb-4"
+				class="mr-2 mb-4 no-cursor"
 				type="info"
 				round
 			>
 				<router-link
 					:to="`/tags/${encodeURIComponent(tag)}`"
 					class="!text-inherit"
+					data-clickable
 				>
 					{{ tag }}
 				</router-link>

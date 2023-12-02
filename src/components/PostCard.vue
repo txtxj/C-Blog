@@ -5,9 +5,10 @@ defineProps(['post'])
 <template>
 	<router-link
 		:class="{
-			'n-card-small': post.summary.size === 'small',
-			'n-card-medium': post.summary.size === 'medium',
-			'n-card-large': post.summary.size === 'large',
+			'n-card-small':
+				post.summary.grow !== 'mid' && post.summary.grow !== 'large',
+			'n-card-medium': post.summary.grow === 'mid',
+			'n-card-large': post.summary.grow === 'large',
 		}"
 		:to="`/posts/${encodeURIComponent(post.summary.url)}`"
 		data-clickable
@@ -16,7 +17,7 @@ defineProps(['post'])
 			class="px-2 n-card-bg-img text-left"
 			header-style="font-size:2em; margin-top:1em;--n-title-text-color: #ffffff"
 			footer-style="text-align: left"
-			:style="{ 'background-image': post.summary.img }"
+			:style="{ 'background-image': `url(${post.summary.cover})` }"
 			hoverable
 		>
 			<template #header>
