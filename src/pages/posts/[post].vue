@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Ref } from 'vue'
+
+const enableToc = inject<Ref<Boolean>>('enableToc')
 const props = defineProps<{ post: string }>()
 const summary = useSummary()
 const currPost = computed(
@@ -8,6 +11,7 @@ const currPost = computed(
 			title: '',
 			tags: [],
 			date: '',
+			toc: false,
 		},
 )
 
@@ -31,13 +35,20 @@ onBeforeUnmount(() => {
 	if (document) document.title = 'Citrineのblog'
 })
 
+onUpdated(() => {
+	console.log(currPost.value.title + '  ' + currPost.value.toc)
+})
+
 const url = computed(() => './' + props.post + '.htm')
 const { data } = useFetch(url, { refetch: true })
+
+watch(currPost, () => {
+	enableToc!.value = !!currPost.value.toc
+})
 </script>
 
 <template>
 	<PostHeader :post="currPost"></PostHeader>
-	<!-- eslint-disable-next-line vue/no-v-html -->
 	<div class="md-blog m-auto text-left" v-html="data"></div>
 	<PostFooter :post="currPost.url"></PostFooter>
 </template>

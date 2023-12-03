@@ -34,7 +34,7 @@
 }
 
 .md-blog a {
-	color: #258fb8;
+	color: #42b883;
 	text-decoration: none;
 }
 .md-blog a:hover {
@@ -87,7 +87,7 @@
 .md-blog td footer {
 	font-size: 14px;
 	margin: 1.6em 0;
-	font-family: font-sans;
+	font-family: font-sans, sans-serif;
 }
 .md-blog td footer cite:before {
 	content: "—";
@@ -103,7 +103,7 @@ html:not(.dark) .md-blog {
 	--prism-background: #fbfbfb;
 	--prism-comment: #a0ada0;
 	--prism-string: #b56959;
-	--prism-literal: #2f8a89;
+	--prism-literal: #555555;
 	--prism-number: #296aa3;
 	--prism-keyword: #1c6b48;
 	--prism-function: #6c7834;
@@ -150,5 +150,21 @@ html.dark .md-blog {
 }
 
 .md-blog .header-anchor {
-	margin-left: -1em;
+	color: #444444;
+	margin-left: -1.5ch;
+	padding-left: 1.5ch;
+}
+
+.md-blog .header-anchor:hover {
+	text-decoration: none;
+}
+
+.md-blog .header-anchor:hover::before {
+	content: '¶';
+	color: #8a5908;
+	position: relative;
+	float: left;
+	left: -1.5ch;
+	width: 0;
+	height: 0;
 }

@@ -2,11 +2,7 @@
 import { GithubFilled, CheckOutlined } from '@ant-design/icons-vue'
 const props = defineProps(['enableToc'])
 
-const innerEnableToc = ref<Boolean>(false)
-
-onMounted(() => {
-	innerEnableToc.value = !!props.enableToc
-})
+const innerEnableToc = computed(() => !!props.enableToc)
 </script>
 
 <template>

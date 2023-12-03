@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { PostSummary } from '~/composables/useSummary'
-import { Token } from 'markdown-it'
+import type { Token } from 'markdown-it'
 
 import fm from 'front-matter'
 import katex from 'katex'
@@ -30,9 +30,11 @@ const renderer = new MarkdownIt({ html: true })
 		katexOptions: { strict: false },
 	})
 	.use(MDAnchor, {
-		permalink: true,
 		permalinkBefore: true,
-		permalinkAttrs: () => ({ 'data-clickable': '' }),
+		permalink: MDAnchor.permalink.headerLink({
+			safariReaderFix: true,
+			renderAttrs: () => ({ 'data-clickable': '' }),
+		}),
 	})
 
 const publicPosts = path.join('public', 'posts')
