@@ -7,8 +7,10 @@ import { Token } from 'markdown-it'
 import fm from 'front-matter'
 import katex from 'katex'
 import MarkdownIt from 'markdown-it'
-import MDIterator from 'markdown-it-for-inline'
 import MDPrism from 'markdown-it-prism'
+// @ts-ignore
+import MDIterator from 'markdown-it-for-inline'
+// @ts-ignore
 import MDTexMath from 'markdown-it-texmath'
 
 const renderer = new MarkdownIt({ html: true })
@@ -70,7 +72,7 @@ async function buildPosts() {
 		post.date = formatDate(post.date)
 	})
 	for (const post of posts) {
-		const rendered = renderer.render(post.content)
+		const rendered = renderer.render(post.content!)
 		await fs.writeFile(path.join(publicPosts, `${post.url}.htm`), rendered)
 	}
 
