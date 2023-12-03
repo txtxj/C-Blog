@@ -13,6 +13,7 @@ const postIndex = computed(() =>
 		<div v-if="postIndex > 0" class="float-left my-2">
 			<router-link
 				:to="`/posts/${encodeURIComponent(summary[postIndex - 1].url)}`"
+				data-clickable
 			>
 				上一篇：{{ summary[postIndex - 1].title }}
 			</router-link>
@@ -20,6 +21,7 @@ const postIndex = computed(() =>
 		<div v-if="postIndex + 1 < summary.length" class="float-right my-2">
 			<router-link
 				:to="`/posts/${encodeURIComponent(summary[postIndex + 1].url)}`"
+				data-clickable
 			>
 				下一篇：{{ summary[postIndex + 1].title }}
 			</router-link>
