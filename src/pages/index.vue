@@ -8,7 +8,7 @@ const posts = computed(() => {
 			detail,
 			summary: summary.value[i],
 		}))
-		.slice((page.value - 1) * 10, page.value * 10)
+		.slice((page.value - 1) * 8, page.value * 8)
 })
 
 onMounted(() =>

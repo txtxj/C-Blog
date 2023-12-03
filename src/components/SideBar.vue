@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GithubFilled, CheckOutlined } from '@ant-design/icons-vue'
+import { GithubFilled } from '@ant-design/icons-vue'
 import { computed } from 'vue'
 const props = defineProps(['enableToc', 'postKey'])
 
@@ -54,7 +54,7 @@ const tocElems = computed(() => props.postKey)
 .side-bar-enter-from,
 .side-bar-leave-to {
 	opacity: 0;
-	transform: translateY(-150%);
+	transform: translateY(-100%);
 }
 
 .side-bar-leave-active {

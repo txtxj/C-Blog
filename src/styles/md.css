@@ -157,11 +157,12 @@ html.dark .md-blog {
 
 .md-blog .header-anchor:hover {
 	text-decoration: none;
+	color: #42b883;
 }
 
 .md-blog .header-anchor:hover::before {
 	content: '¶';
-	color: #8a5908;
+	color: #42b883;
 	position: relative;
 	float: left;
 	left: -1.5ch;
