@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { GithubFilled, CheckOutlined } from '@ant-design/icons-vue'
-const props = defineProps(['enableToc'])
+import { computed } from 'vue'
+const props = defineProps(['enableToc', 'postKey'])
 
 const innerEnableToc = computed(() => !!props.enableToc)
+const tocElems = computed(() => props.postKey)
 </script>
 
 <template>
 	<TransitionGroup name="side-bar" tag="div">
-		<Toc v-if="innerEnableToc" key="toc" />
+		<Toc v-if="innerEnableToc" key="toc" :elements="tocElems" />
 		<n-card class="mt-6 text-center" key="blogInfo">
 			<a
 				class="m-1 inline-block"
@@ -17,13 +19,6 @@ const innerEnableToc = computed(() => !!props.enableToc)
 			>
 				<GithubFilled style="font-size: xx-large" />
 			</a>
-			<div
-				class="m-1 inline-block"
-				@click="innerEnableToc = !innerEnableToc"
-				data-clickable
-			>
-				<CheckOutlined style="font-size: xx-large" />
-			</div>
 			<p class="mt-3">Copyright © 2023 Citrine</p>
 			<p>
 				License:

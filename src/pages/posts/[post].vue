@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Ref } from 'vue'
 
-const enableToc = inject<Ref<Boolean>>('enableToc')
 const props = defineProps<{ post: string }>()
 const summary = useSummary()
 const currPost = computed(
@@ -33,18 +32,23 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
 	if (document) document.title = 'Citrineのblog'
-})
-
-onUpdated(() => {
-	console.log(currPost.value.title + '  ' + currPost.value.toc)
+	if (enableToc) enableToc.value = false
 })
 
 const url = computed(() => './' + props.post + '.htm')
 const { data } = useFetch(url, { refetch: true })
 
-watch(currPost, () => {
-	enableToc!.value = !!currPost.value.toc
-})
+const enableToc = inject<Ref<Boolean>>('enableToc')
+const postKey = inject<Ref<any>>('postKey')
+
+function updateTocParams() {
+	if (enableToc && postKey) {
+		enableToc.value = !!currPost.value.toc
+		postKey.value = Array.from(document.querySelectorAll('.md-blog h2,h3,h4'))
+	}
+}
+
+onUpdated(updateTocParams)
 </script>
 
 <template>

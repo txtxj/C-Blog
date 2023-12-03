@@ -318,6 +318,7 @@
     "usePage": true,
     "useMouseHover": true,
     "useDataClickable": true,
-    "useMousePosAndEvent": true
+    "useMousePosAndEvent": true,
+    "useToc": true
   }
 }

@@ -3,7 +3,9 @@ import type { LayoutInst } from 'naive-ui'
 import { provide, Ref } from 'vue'
 
 const enableToc = ref<Boolean>(false)
+const postKey = ref<string>('')
 provide<Ref<Boolean>>('enableToc', enableToc)
+provide<Ref<any>>('postKey', postKey)
 
 const contentRef = ref<LayoutInst | null>(null)
 const routePath = toRef(useRoute(), 'path')
@@ -39,7 +41,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			show-trigger="arrow-circle"
 			bordered
 		>
-			<SideBar :enable-toc="enableToc" />
+			<SideBar :enable-toc="enableToc" :post-key="postKey" />
 		</n-layout-sider>
 	</n-layout>
 </template>
