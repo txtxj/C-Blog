@@ -148,3 +148,7 @@ html.dark .md-blog {
 	--prism-interpolation: #dddddd;
 	--prism-constant: #dddddd;
 }
+
+.md-blog .header-anchor {
+	margin-left: -1em;
+}

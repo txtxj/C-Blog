@@ -8,6 +8,7 @@ import fm from 'front-matter'
 import katex from 'katex'
 import MarkdownIt from 'markdown-it'
 import MDPrism from 'markdown-it-prism'
+import MDAnchor from 'markdown-it-anchor'
 // @ts-ignore
 import MDIterator from 'markdown-it-for-inline'
 // @ts-ignore
@@ -27,6 +28,11 @@ const renderer = new MarkdownIt({ html: true })
 		engine: katex,
 		delimiters: 'dollars',
 		katexOptions: { strict: false },
+	})
+	.use(MDAnchor, {
+		permalink: true,
+		permalinkBefore: true,
+		permalinkAttrs: () => ({ 'data-clickable': '' }),
 	})
 
 const publicPosts = path.join('public', 'posts')
