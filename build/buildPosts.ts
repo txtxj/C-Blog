@@ -2,19 +2,30 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { PostSummary } from '~/composables/useSummary'
+import { Token } from 'markdown-it'
 
 import fm from 'front-matter'
+import katex from 'katex'
 import MarkdownIt from 'markdown-it'
 import MDIterator from 'markdown-it-for-inline'
+import MDPrism from 'markdown-it-prism'
+import MDTexMath from 'markdown-it-texmath'
 
-const renderer = new MarkdownIt({ html: true }).use(
-	MDIterator,
-	'addDataClickable',
-	'link_open',
-	function (tokens, idx) {
-		tokens[idx].attrSet('data-clickable', '')
-	},
-)
+const renderer = new MarkdownIt({ html: true })
+	.use(
+		MDIterator,
+		'addDataClickable',
+		'link_open',
+		function (tokens: Token[], idx: number) {
+			tokens[idx].attrSet('data-clickable', '')
+		},
+	)
+	.use(MDPrism)
+	.use(MDTexMath, {
+		engine: katex,
+		delimiters: 'dollars',
+		katexOptions: { strict: false },
+	})
 
 const publicPosts = path.join('public', 'posts')
 
