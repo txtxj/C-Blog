@@ -39,7 +39,7 @@ const url = computed(() => './' + props.post + '.htm')
 const { data } = useFetch(url, { refetch: true })
 
 const enableToc = inject<Ref<Boolean>>('enableToc')
-const postKey = inject<Ref<any>>('postKey')
+const postKey = inject<Ref<Iterable<Element>>>('postKey')
 
 function updateTocParams() {
 	if (enableToc && postKey) {

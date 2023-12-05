@@ -3,9 +3,9 @@ import type { LayoutInst } from 'naive-ui'
 import { provide, Ref } from 'vue'
 
 const enableToc = ref<Boolean>(false)
-const postKey = ref<string>('')
+const postKey = ref<Iterable<Element>>([])
 provide<Ref<Boolean>>('enableToc', enableToc)
-provide<Ref<any>>('postKey', postKey)
+provide<Ref<Iterable<Element>>>('postKey', postKey)
 
 const contentRef = ref<LayoutInst | null>(null)
 const routePath = toRef(useRoute(), 'path')
