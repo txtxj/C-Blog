@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { GithubFilled } from '@ant-design/icons-vue'
-import { computed } from 'vue'
-const props = defineProps(['enableToc', 'postKey'])
-
-const innerEnableToc = computed(() => !!props.enableToc)
-const tocElems = computed(() => props.postKey)
+const { enableToc } = useToc()
 </script>
 
 <template>
 	<TransitionGroup name="side-bar" tag="div">
-		<Toc v-if="innerEnableToc" key="toc" :elements="tocElems" />
+		<Toc v-if="enableToc" key="toc" />
 		<n-card class="mt-6 text-center" key="blogInfo">
 			<a
 				class="m-1 inline-block"

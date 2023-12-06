@@ -1,16 +1,21 @@
 <script setup lang="ts">
-defineProps(['elements'])
+const { getToc } = useToc()
+const elem = getToc()
 </script>
 
 <template>
 	<n-card>
-		<ul class="toc">
-			<li v-for="(item, index) in elements" :id="`toc-${index}`">
+		<TransitionGroup name="list" tag="ul" class="toc">
+			<li
+				v-for="(item, index) in elem"
+				:id="`toc-${index}`"
+				:key="`toc-${index}`"
+			>
 				<a :href="`#${item.id}`" data-clickable>
-					{{ item.innerText }}
+					{{ item }}
 				</a>
 			</li>
-		</ul>
+		</TransitionGroup>
 	</n-card>
 </template>
 
@@ -30,5 +35,20 @@ ul.toc > li > a:hover::before {
 	left: -1.5ch;
 	width: 0;
 	height: 0;
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+	transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+	opacity: 0;
+	transform: translateX(30px);
+}
+.list-leave-active {
+	position: absolute;
 }
 </style>
