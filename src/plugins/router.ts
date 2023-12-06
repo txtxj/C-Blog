@@ -1,6 +1,5 @@
 import { createGetRoutes, setupLayouts } from 'virtual:meta-layouts'
 import { createRouter, createWebHistory } from 'vue-router'
-import { routes as fileRoutes } from 'vue-router/auto/routes'
 import generatedRoutes from 'virtual:generated-pages'
 
 declare module 'vue-router' {

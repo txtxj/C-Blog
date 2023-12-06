@@ -9,10 +9,11 @@ const elem = getToc()
 			<li
 				v-for="(item, index) in elem"
 				:id="`toc-${index}`"
-				:key="`toc-${index}`"
+				:key="`toc-${item.id}`"
+				:style="{ 'margin-left': `${item.tab * 1.5}ch` }"
 			>
 				<a :href="`#${item.id}`" data-clickable>
-					{{ item }}
+					{{ item.text }}
 				</a>
 			</li>
 		</TransitionGroup>
