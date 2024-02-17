@@ -15,7 +15,7 @@ const { enableToc } = useToc()
 			>
 				<GithubFilled style="font-size: xx-large" />
 			</a>
-			<p class="mt-3">Copyright © 2023 Citrine</p>
+			<p class="mt-3">Copyright © 2023-2024 Citrine</p>
 			<p>
 				License:
 				<a

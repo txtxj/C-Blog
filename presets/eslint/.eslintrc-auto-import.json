@@ -319,6 +319,7 @@
     "useMouseHover": true,
     "useDataClickable": true,
     "useMousePosAndEvent": true,
-    "useToc": true
+    "useToc": true,
+    "useBubble": true
   }
 }

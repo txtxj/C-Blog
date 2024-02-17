@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CursorContainer: typeof import('./../../src/components/CursorContainer.vue')['default']
+    ECharts: typeof import('./../../src/components/ECharts.vue')['default']
     Header: typeof import('./../../src/components/Header.vue')['default']
     NCard: typeof import('naive-ui')['NCard']
     NDivider: typeof import('naive-ui')['NDivider']
