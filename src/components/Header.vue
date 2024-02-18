@@ -12,7 +12,7 @@ const menuOptions = [
 	{
 		label: '标签',
 		to: '/tags',
-		match: '/tags$',
+		match: '/tags',
 	},
 	{
 		label: '关于',

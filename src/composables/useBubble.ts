@@ -3,7 +3,7 @@ import { Ref } from 'vue'
 
 function initBubble(
 	data = [],
-	format = [],
+	format = [], // [label, amount, route]
 	dom: Ref<HTMLDivElement | null | undefined>,
 ): ECharts {
 	let bubbleChart: ECharts
@@ -62,6 +62,7 @@ function initBubble(
 		bubbleData.push({
 			name: item[format[0]],
 			value: item[format[1]],
+			route: item[format[2] ?? 1],
 			symbolSize: size,
 			draggable: false,
 			itemStyle: {
@@ -106,6 +107,13 @@ function initBubble(
 		bubbleChart.getZr().setCursorStyle('inherit')
 		bubbleChart.getDom().setAttribute('data-clickable', '')
 	})
+
+	if (format[2]) {
+		const router = useRouter()
+		bubbleChart.on('mousedown', function (params) {
+			router.push((params.data as { route: string }).route)
+		})
+	}
 
 	return bubbleChart
 }

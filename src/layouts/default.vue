@@ -3,10 +3,13 @@ import type { LayoutInst } from 'naive-ui'
 
 const contentRef = ref<LayoutInst | null>(null)
 const routePath = toRef(useRoute(), 'path')
-const { page } = usePage()
+const { page, pageMax } = usePage()
+
 watch([routePath, page], () => {
 	contentRef.value?.scrollTo(0, 0)
 })
+
+watch(pageMax, () => nextTick(() => useDataClickable('.n-pagination-item')))
 
 onMounted(() => useDataClickable('.n-layout-toggle-button'))
 </script>

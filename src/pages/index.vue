@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const summary = useSummary()
-const { page, pageMax } = usePage()
+const { setCurrentView, page, pageMax } = usePage()
 const posts = computed(() => {
 	const currSummary = summary.value
 	return currSummary
@@ -11,9 +11,10 @@ const posts = computed(() => {
 		.slice((page.value - 1) * 8, page.value * 8)
 })
 
-onMounted(() =>
-	useDataClickable('.n-pagination-item, .n-scrollbar-rail__scrollbar'),
-)
+onMounted(() => {
+	setCurrentView('/', summary)
+	useDataClickable('.n-pagination-item, .n-scrollbar-rail__scrollbar')
+})
 
 onMounted(() => {
 	let scrollbarContents = Array.from(document.querySelectorAll('.n-scrollbar'))

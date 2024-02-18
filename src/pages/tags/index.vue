@@ -11,7 +11,11 @@ const _summary = useSummary()
 const summary = _summary.value.map((post) => post.tags).flat()
 const data = [...counter(summary).entries()]
 	.sort((tag_a, tag_b) => tag_b[1] - tag_a[1])
-	.map(([s, n]) => ({ label: s, amount: n }))
+	.map(([s, n]) => ({
+		label: s,
+		amount: n,
+		route: `/tags/${encodeURIComponent(s as string)}`,
+	}))
 
 import { onMounted } from 'vue'
 import { ECharts } from 'echarts'
@@ -29,7 +33,7 @@ function resizeThisBubble() {
 onMounted(() => {
 	bubble.value = initBubble(
 		data as never[],
-		['label', 'amount'] as never[],
+		['label', 'amount', 'route'] as never[],
 		bubbleElement,
 	)
 	bubbleContainer.value!.contentDocument!.defaultView!.addEventListener(
@@ -81,7 +85,7 @@ onBeforeUnmount(() => {
 .no-cursor >>> div {
 	color: #42b883;
 	cursor:
-		url('../assets/cursor.png') 3 3,
+		url('../../assets/cursor.png') 3 3,
 		default !important;
 }
 </style>
