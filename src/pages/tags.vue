@@ -1,16 +1,22 @@
 <script setup lang="ts">
+// trick：一个用 map 计数的 util 函数
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
+const counter = <T extends unknown>(arr: Array<T>) =>
+	arr.reduce(
+		(acc: Map<T, number>, e: T) => acc.set(e, (acc.get(e) || 0) + 1),
+		new Map(),
+	)
+
+const _summary = useSummary()
+const summary = _summary.value.map((post) => post.tags).flat()
+const data = [...counter(summary).entries()]
+	.sort((tag_a, tag_b) => tag_b[1] - tag_a[1])
+	.map(([s, n]) => ({ label: s, amount: n }))
+
 import { onMounted } from 'vue'
 import { ECharts } from 'echarts'
 
 const { initBubble, resizeBubble } = useBubble()
-
-let dataIndex = ['label', 'amount']
-let data = [
-	{ label: '可乐', amount: 100 },
-	{ label: '雪碧', amount: 70 },
-	{ label: '土豆', amount: 30 },
-	{ label: '饼干', amount: 50 },
-]
 
 const bubbleContainer = ref<HTMLObjectElement | null>()
 const bubbleElement = ref<HTMLDivElement | null>()
@@ -23,7 +29,7 @@ function resizeThisBubble() {
 onMounted(() => {
 	bubble.value = initBubble(
 		data as never[],
-		dataIndex as never[],
+		['label', 'amount'] as never[],
 		bubbleElement,
 	)
 	bubbleContainer.value!.contentDocument!.defaultView!.addEventListener(

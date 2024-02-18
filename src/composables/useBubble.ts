@@ -32,18 +32,18 @@ function initBubble(
 	// 气泡基础大小
 	let basicSize = 70
 	// 节点之间的斥力因子,值越大,气泡间距越大
-	let repulsion = 380
+	let repulsion = 450
 	// 根据气泡数量配置基础大小和斥力因子（以实际情况进行适当调整，使气泡合理分布）
 	if (data.length >= 5 && data.length < 10) {
-		basicSize = 50
-		repulsion = 230
+		basicSize = 60
+		repulsion = 350
 	}
 	if (data.length >= 10 && data.length < 20) {
+		basicSize = 50
+		repulsion = 250
+	} else if (data.length >= 20) {
 		basicSize = 40
 		repulsion = 150
-	} else if (data.length >= 20) {
-		basicSize = 30
-		repulsion = 75
 	}
 
 	// 填充气泡数据数组bubbleData
