@@ -104,9 +104,7 @@ function initBubble(
 	})
 	bubbleChart.on('mousemove', function (params) {
 		bubbleChart.getZr().setCursorStyle('inherit')
-		if (params.seriesIndex === 0) {
-			bubbleChart.getDom().setAttribute('data-clickable', '')
-		}
+		bubbleChart.getDom().setAttribute('data-clickable', '')
 	})
 
 	return bubbleChart

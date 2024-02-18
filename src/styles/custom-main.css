@@ -12,5 +12,5 @@ html {
 
 html, body, a,
 .no-cursor {
-	cursor: url("../assets/cursor.png") 3 3, default;
+	cursor: url("../assets/cursor.png") 3 3, default !important;
 }

@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
 		/>
 		<div
 			ref="bubbleElement"
-			id="chart-container"
+			class="no-cursor"
 			:style="{ height: '100%', width: '100%' }"
 		/>
 	</n-card>
@@ -71,5 +71,11 @@ onBeforeUnmount(() => {
 	opacity: 0;
 	z-index: -1000;
 	pointer-events: none;
+}
+.no-cursor >>> div {
+	color: #42b883;
+	cursor:
+		url('../assets/cursor.png') 3 3,
+		default !important;
 }
 </style>
