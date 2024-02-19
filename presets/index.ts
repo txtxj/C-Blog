@@ -1,6 +1,5 @@
 import { utimes } from 'fs/promises'
 import { isPackageExists } from 'local-pkg'
-import Prism from 'markdown-it-prism'
 import { dirname, resolve } from 'path'
 import { debounce } from 'perfect-debounce'
 import { argv } from 'process'
@@ -50,6 +49,8 @@ import Jsx from '@vitejs/plugin-vue-jsx'
 
 import type { ComponentResolver } from 'unplugin-vue-components/types'
 import type { Plugin } from 'vite'
+
+import { markdownWrapperClasses, useMarkdownPlugins } from './plugins/markdown'
 
 export const _dirname =
 	typeof __dirname !== 'undefined'
@@ -244,9 +245,9 @@ export default function () {
 		 */
 		plugins.push(
 			Markdown({
-				wrapperClasses: safelist,
+				wrapperClasses: markdownWrapperClasses,
 				markdownItSetup(md) {
-					md.use(Prism)
+					useMarkdownPlugins(md)
 				},
 			}),
 		)

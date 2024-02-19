@@ -2,40 +2,13 @@ import fs from 'fs/promises'
 import path from 'path'
 
 import { PostSummary } from '~/composables/useSummary'
-import type { Token } from 'markdown-it'
 
 import fm from 'front-matter'
-import katex from 'katex'
 import MarkdownIt from 'markdown-it'
-import MDPrism from 'markdown-it-prism'
-import MDAnchor from 'markdown-it-anchor'
-// @ts-ignore
-import MDIterator from 'markdown-it-for-inline'
-// @ts-ignore
-import MDTexMath from 'markdown-it-texmath'
+import { useMarkdownPlugins } from '../presets/plugins/markdown'
 
 const renderer = new MarkdownIt({ html: true })
-	.use(
-		MDIterator,
-		'addDataClickable',
-		'link_open',
-		function (tokens: Token[], idx: number) {
-			tokens[idx].attrSet('data-clickable', '')
-		},
-	)
-	.use(MDPrism)
-	.use(MDTexMath, {
-		engine: katex,
-		delimiters: 'dollars',
-		katexOptions: { strict: false },
-	})
-	.use(MDAnchor, {
-		permalinkBefore: true,
-		permalink: MDAnchor.permalink.headerLink({
-			safariReaderFix: true,
-			renderAttrs: () => ({ 'data-clickable': '' }),
-		}),
-	})
+useMarkdownPlugins(renderer)
 
 const publicPosts = path.join('public', 'posts')
 
