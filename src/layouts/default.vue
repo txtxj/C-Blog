@@ -27,7 +27,11 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			content-style="padding: 0 24px;min-width: 600px;overflow: hidden;"
 		>
 			<main class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200">
-				<RouterView />
+				<router-view v-slot="{ Component }">
+					<transition name="fade" mode="out-in">
+						<component :is="Component" />
+					</transition>
+				</router-view>
 			</main>
 		</n-layout-content>
 		<n-layout-sider
@@ -50,5 +54,14 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 		rgba(255, 255, 204, 0.8),
 		rgba(255, 204, 255, 0.8)
 	);
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.15s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
 }
 </style>

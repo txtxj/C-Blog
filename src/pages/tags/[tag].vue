@@ -36,11 +36,13 @@ watch(
 </script>
 
 <template>
-	<n-divider title-placement="left"> #{{ tag }} </n-divider>
-	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
-		<PostCard v-for="post in posts" :key="post.summary.url" :post="post" />
-		<div class="my-10 w-100vw flex" style="justify-content: center">
-			<n-pagination v-model:page="page" :page-count="pageMax" />
+	<div>
+		<n-divider title-placement="left"> # {{ tag }} </n-divider>
+		<div style="display: flex; flex-direction: row; flex-wrap: wrap">
+			<PostCard v-for="post in posts" :key="post.summary.url" :post="post" />
+			<div class="my-10 w-100vw flex" style="justify-content: center">
+				<n-pagination v-model:page="page" :page-count="pageMax" />
+			</div>
 		</div>
 	</div>
 </template>

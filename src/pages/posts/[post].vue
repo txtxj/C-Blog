@@ -49,7 +49,9 @@ onUpdated(updateTocParams)
 </script>
 
 <template>
-	<PostHeader :post="currPost"></PostHeader>
-	<div class="md-blog m-auto text-left" v-html="data"></div>
-	<PostFooter :post="currPost.url"></PostFooter>
+	<div>
+		<PostHeader :post="currPost"></PostHeader>
+		<div class="md-blog m-auto text-left" v-html="data"></div>
+		<PostFooter :post="currPost.url"></PostFooter>
+	</div>
 </template>
