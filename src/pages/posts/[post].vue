@@ -33,25 +33,58 @@ onBeforeUnmount(() => {
 	if (enableToc) enableToc.value = false
 })
 
-const url = computed(() => './' + props.post + '.htm')
-const { data } = useFetch(url, { refetch: true })
+// const url = computed(() => './' + props.post + '.htm')
+// const { data } = useFetch(url, { refetch: true })
 
 const { setToc, enableToc } = useToc()
 
-function updateTocParams() {
+function updateArticle() {
 	enableToc.value = !!currPost.value.toc
 	if (enableToc.value) {
+		// 竟然不需要 setTimeout，感觉很奇妙，说不定以后会有 bug
 		setToc(Array.from(document.querySelectorAll('.md-blog h2,h3,h4')))
+	}
+	let pictures = useDataClickable('.n-image > img')
+	for (let p of pictures) {
+		;(p as HTMLElement).addEventListener('click', () =>
+			useDataClickable('.n-image-preview-toolbar .n-base-icon'),
+		)
 	}
 }
 
-onUpdated(updateTocParams)
+import { defineAsyncComponent } from 'vue'
+
+let Article: any
+watch(
+	() => props.post,
+	() => {
+		Article = defineAsyncComponent(() => import(`/posts/${props.post}.md`))
+	},
+	{ immediate: true },
+)
 </script>
 
 <template>
-	<div>
+	<div class="md-blog m-auto text-left">
 		<PostHeader :post="currPost"></PostHeader>
-		<div class="md-blog m-auto text-left" v-html="data"></div>
+		<Suspense @resolve="updateArticle">
+			<component :is="Article"></component>
+		</Suspense>
+		<!--		<div class="md-blog m-auto text-left" v-html="data"></div>-->
 		<PostFooter :post="currPost.url"></PostFooter>
 	</div>
 </template>
+
+<style>
+.n-image {
+	display: inherit !important;
+	cursor: inherit !important;
+}
+.n-image-preview-toolbar .n-base-icon {
+	box-sizing: content-box;
+	cursor: inherit !important;
+}
+.n-image-preview {
+	cursor: inherit !important;
+}
+</style>

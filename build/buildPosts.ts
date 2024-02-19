@@ -54,7 +54,7 @@ async function buildPosts() {
 	})
 	for (const post of posts) {
 		const rendered = renderer.render(post.content!)
-		await fs.writeFile(path.join(publicPosts, `${post.url}.htm`), rendered)
+		await fs.writeFile(path.join(publicPosts, `${post.url}.md`), rendered)
 	}
 
 	for (const post of posts) delete post.content
