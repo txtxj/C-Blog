@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { localTitle } from '~/plugins/title'
+
 const props = defineProps<{ post: string }>()
 const summary = useSummary()
 const currPost = computed(
@@ -12,10 +14,9 @@ const currPost = computed(
 		},
 )
 
-const title = computed(() => {
-	return `${currPost.value.title} | Citrineのblog`
+watch(currPost, () => {
+	localTitle.value = currPost.value.title
 })
-useTitle(title)
 
 onMounted(() => {
 	let scrollbarContents = Array.from(
@@ -29,12 +30,8 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-	if (document) document.title = 'Citrineのblog'
 	if (enableToc) enableToc.value = false
 })
-
-// const url = computed(() => './' + props.post + '.htm')
-// const { data } = useFetch(url, { refetch: true })
 
 const { setToc, enableToc } = useToc()
 

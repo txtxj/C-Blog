@@ -1,17 +1,10 @@
 import { router } from './router'
 
-useTitle(
-	() => {
-		const { path, meta } = router.currentRoute.value
-		if (meta.title) {
-			return `· ${meta.title}`
-		}
-		if (path === '/') {
-			return '· home'
-		}
-		return path.replaceAll('/', ' · ')
-	},
-	{
-		titleTemplate: `${import.meta.env.VITE_APP_TITLE} %s`,
-	},
-)
+export const localTitle = ref('')
+
+useTitle(() => {
+	if (localTitle.value.length > 0) {
+		return `${localTitle.value} | ${import.meta.env.VITE_APP_TITLE}`
+	}
+	return import.meta.env.VITE_APP_TITLE
+})
