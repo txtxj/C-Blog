@@ -33,7 +33,7 @@ const { enableToc } = useToc()
 					style="color: #258fb8"
 					target="_blank"
 					data-clickable
-					>My-Blog</a
+					>C-Blog</a
 				>
 			</p>
 		</n-card>
