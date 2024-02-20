@@ -2,6 +2,6 @@
 const { isMobile } = usePhone()
 </script>
 <template>
-	<router-view :key="$route.path" />
+	<router-view />
 	<cursor-container v-if="!isMobile" />
 </template>
