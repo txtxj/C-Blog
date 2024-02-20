@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps(['post'])
+const props = defineProps(['post'])
+const { isMobile } = usePhone()
 </script>
 
 <template>
@@ -14,7 +15,8 @@ defineProps(['post'])
 		data-clickable
 	>
 		<n-card
-			class="px-2 n-card-bg-img text-left"
+			v-if="!isMobile"
+			class="px-2 n-card-bg-img text-left pc-n-card"
 			header-style="font-size:2em; margin-top:1em;--n-title-text-color: #ffffff"
 			footer-style="text-align: left"
 			:style="{ 'background-image': `url(${post.summary.cover})` }"
@@ -39,22 +41,46 @@ defineProps(['post'])
 				</span>
 			</template>
 		</n-card>
+		<n-card
+			v-else
+			header-style="font-size:2em; margin-top:1em;"
+			footer-style="text-align: left"
+		>
+			<template #header>
+				{{ post.summary.title }}
+			</template>
+			<template #default>
+				{{ post.summary.date }}
+			</template>
+			<template #footer>
+				<span
+					v-for="tag in post.summary.tags"
+					:key="tag"
+					class="mr-2 n-card-tag-hover"
+					data-clickable
+				>
+					<router-link :to="`/tags/${encodeURIComponent(tag)}`"
+						>#{{ tag }}</router-link
+					>
+				</span>
+			</template>
+		</n-card>
 	</router-link>
 </template>
 
 <style scoped>
-.n-card {
+.pc-n-card {
 	color: #ffffff;
 	border-radius: 15px;
 	padding: 20px;
 	height: 328px;
 }
-.n-card {
+.pc-n-card {
 	transition: background-color 0.3s;
 	background-blend-mode: darken;
 	background-color: rgba(0, 0, 0, 0.4);
 }
-.n-card:hover {
+.pc-n-card:hover {
 	background-blend-mode: darken;
 	background-color: rgba(0, 0, 0, 0.25);
 }

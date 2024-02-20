@@ -4,14 +4,21 @@ import type { LayoutInst } from 'naive-ui'
 const contentRef = ref<LayoutInst | null>(null)
 const routePath = toRef(useRoute(), 'path')
 const { page, pageMax } = usePage()
+const { isMobile } = usePhone()
 
 watch([routePath, page], () => {
-	contentRef.value?.scrollTo(0, 0)
+	contentRef.value?.scrollTo({ top: 0, behavior: 'smooth' })
 })
 
 watch(pageMax, () => nextTick(() => useDataClickable('.n-pagination-item')))
 
 onMounted(() => useDataClickable('.n-layout-toggle-button'))
+const mainStyle = computed(() => {
+	return (
+		(isMobile.value ? 'mt-2 ' : 'mt-10 ') +
+		'pb-10 text-center text-gray-700 dark:text-gray-200'
+	)
+})
 </script>
 
 <template>
@@ -24,9 +31,9 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 		<n-layout-content
 			ref="contentRef"
 			:native-scrollbar="false"
-			content-style="padding: 0 24px;min-width: 600px;overflow: hidden;"
+			content-style="padding: 0 24px;min-width: 280px;overflow: hidden;"
 		>
-			<main class="mt-10 pb-10 text-center text-gray-700 dark:text-gray-200">
+			<main :class="mainStyle">
 				<router-view v-slot="{ Component }">
 					<transition name="fade" mode="out-in">
 						<component :is="Component" />
@@ -35,6 +42,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 			</main>
 		</n-layout-content>
 		<n-layout-sider
+			v-if="!isMobile"
 			content-style="padding: 24px;"
 			:collapsed-width="14"
 			:width="320"
@@ -44,6 +52,7 @@ onMounted(() => useDataClickable('.n-layout-toggle-button'))
 		>
 			<SideBar />
 		</n-layout-sider>
+		<MobileBar v-if="isMobile"></MobileBar>
 	</n-layout>
 </template>
 

@@ -5,7 +5,10 @@ import { useMousePosAndEvent } from '~/composables/useMousePosAndEvent'
 
 const cursorEffect = ref<HTMLInputElement | null>(null)
 const { x, y, hover, click, consumeClick } = useMousePosAndEvent()
-const cursorOuterPos = ref<{ left: number; top: number }>({ left: 0, top: 0 })
+const cursorOuterPos = ref<{ left: number; top: number }>({
+	left: -64,
+	top: -64,
+})
 const cursorOuterPosPx = computed(() => ({
 	left: cursorOuterPos.value.left + 'px',
 	top: cursorOuterPos.value.top + 'px',

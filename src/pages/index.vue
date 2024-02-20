@@ -24,12 +24,21 @@ onMounted(() => {
 		})
 	}
 })
+const { isMobile } = usePhone()
+const gridStyle = computed(() => {
+	return isMobile.value
+		? ''
+		: 'display: flex; flex-direction: row; flex-wrap: wrap'
+})
+const paginationStyle = computed(() => {
+	return (isMobile.value ? '' : 'w-100vw ') + 'my-10 flex'
+})
 </script>
 
 <template>
-	<div style="display: flex; flex-direction: row; flex-wrap: wrap">
+	<div :style="gridStyle">
 		<PostCard v-for="post in posts" :key="post.summary.url" :post="post" />
-		<div class="my-10 w-100vw flex" style="justify-content: center">
+		<div :class="paginationStyle" style="justify-content: center">
 			<n-pagination v-model:page="page" :page-count="pageMax" />
 		</div>
 	</div>
