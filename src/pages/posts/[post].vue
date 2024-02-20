@@ -71,9 +71,14 @@ const modules = import.meta.glob('~/../public/dynamic/*.md')
 watch(
 	() => props.post,
 	() => {
-		Article = defineAsyncComponent(
-			modules[`/public/dynamic/${props.post}.md`] as any,
-		)
+		if (modules[`/public/dynamic/${props.post}.md`] !== undefined) {
+			Article = defineAsyncComponent(
+				modules[`/public/dynamic/${props.post}.md`] as any,
+			)
+		} else {
+			const router = useRouter()
+			router.replace('/notFound')
+		}
 	},
 	{ immediate: true },
 )
