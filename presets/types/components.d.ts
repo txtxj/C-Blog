@@ -8,18 +8,15 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CursorContainer: typeof import('./../../src/components/CursorContainer.vue')['default']
-    ECharts: typeof import('./../../src/components/ECharts.vue')['default']
     Header: typeof import('./../../src/components/Header.vue')['default']
     NCard: typeof import('naive-ui')['NCard']
     NDivider: typeof import('naive-ui')['NDivider']
-    NH1: typeof import('naive-ui')['NH1']
     NImage: typeof import('naive-ui')['NImage']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NPagination: typeof import('naive-ui')['NPagination']
     NTag: typeof import('naive-ui')['NTag']
-    NText: typeof import('naive-ui')['NText']
     PostCard: typeof import('./../../src/components/PostCard.vue')['default']
     PostFooter: typeof import('./../../src/components/PostFooter.vue')['default']
     PostHeader: typeof import('./../../src/components/PostHeader.vue')['default']

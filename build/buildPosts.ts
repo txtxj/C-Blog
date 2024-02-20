@@ -10,7 +10,7 @@ import { useMarkdownPlugins } from '../presets/plugins/markdown'
 const renderer = new MarkdownIt({ html: true })
 useMarkdownPlugins(renderer)
 
-const publicPosts = path.join('public', 'posts')
+const publicPosts = path.join('public', 'dynamic')
 
 const formatDate = (date: Date) => {
 	return date
@@ -53,7 +53,7 @@ async function buildPosts() {
 		post.date = formatDate(post.date)
 	})
 	for (const post of posts) {
-		const rendered = renderer.render(post.content!)
+		const rendered = post.content!
 		await fs.writeFile(path.join(publicPosts, `${post.url}.md`), rendered)
 	}
 

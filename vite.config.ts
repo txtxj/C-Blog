@@ -7,6 +7,7 @@ export default defineConfig({
 		alias: {
 			'~/': `${resolve(__dirname, 'src')}/`,
 		},
+		extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue', '.md'],
 	},
 	plugins: [Tov()],
 	server: { host: 'localhost', port: 1314 },

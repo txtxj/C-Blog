@@ -55,10 +55,26 @@ function updateArticle() {
 import { defineAsyncComponent } from 'vue'
 
 let Article: any
+
+// watch(
+// 	() => props.post,
+// 	() => {
+// 		Article = defineAsyncComponent(
+// 			() =>
+// 				// import(`/dynamic/${props.post}.md`, { with: { type: 'javascript' } }),
+// 				import('~/../public/dynamic/test.md'),
+// 		)
+// 	},
+// 	{ immediate: true },
+// )
+
+const modules = import.meta.glob('~/../public/dynamic/*.md')
 watch(
 	() => props.post,
 	() => {
-		Article = defineAsyncComponent(() => import(`/posts/${props.post}.md`))
+		Article = defineAsyncComponent(
+			modules[`/public/dynamic/${props.post}.md`] as any,
+		)
 	},
 	{ immediate: true },
 )
