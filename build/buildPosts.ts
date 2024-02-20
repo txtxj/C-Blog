@@ -4,11 +4,6 @@ import path from 'path'
 import { PostSummary } from '~/composables/useSummary'
 
 import fm from 'front-matter'
-import MarkdownIt from 'markdown-it'
-import { useMarkdownPlugins } from '../presets/plugins/markdown'
-
-const renderer = new MarkdownIt({ html: true })
-useMarkdownPlugins(renderer)
 
 const publicPosts = path.join('public', 'dynamic')
 

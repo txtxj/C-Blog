@@ -41,7 +41,6 @@ const { setToc, enableToc } = useToc()
 function updateArticle() {
 	enableToc.value = !!currPost.value.toc
 	if (enableToc.value) {
-		// 竟然不需要 setTimeout，感觉很奇妙，说不定以后会有 bug
 		setToc(Array.from(document.querySelectorAll('.md-blog h2,h3,h4')))
 	}
 	let pictures = useDataClickable('.n-image > img')
