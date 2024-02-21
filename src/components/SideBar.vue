@@ -1,42 +1,13 @@
 <script setup lang="ts">
 import { GithubFilled } from '@ant-design/icons-vue'
+import BlogInfo from '~/components/BlogInfo.vue'
 const { enableToc } = useToc()
 </script>
 
 <template>
 	<TransitionGroup name="side-bar" tag="div">
 		<Toc v-if="enableToc" key="toc" />
-		<n-card class="mt-6 text-center" key="blogInfo">
-			<a
-				class="m-1 inline-block"
-				href="https://github.com/txtxj"
-				target="_blank"
-				data-clickable
-			>
-				<GithubFilled style="font-size: xx-large" />
-			</a>
-			<p class="mt-3">Copyright © 2023-2024 Citrine</p>
-			<p>
-				License:
-				<a
-					href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-					style="color: #258fb8"
-					target="_blank"
-					data-clickable
-					>CC-BY-NC-SA 4.0</a
-				>
-			</p>
-			<p>
-				Powered by
-				<a
-					href="https://github.com/txtxj"
-					style="color: #258fb8"
-					target="_blank"
-					data-clickable
-					>C-Blog</a
-				>
-			</p>
-		</n-card>
+		<BlogInfo key="blogInfo" force-show="true" />
 	</TransitionGroup>
 </template>
 

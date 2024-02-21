@@ -56,8 +56,8 @@ const mainStyle = computed(() => {
 	</n-layout>
 </template>
 
-<style>
-.n-scrollbar-rail > .n-scrollbar-rail__scrollbar {
+<style scoped>
+div >>> .n-scrollbar-rail__scrollbar {
 	background: linear-gradient(
 		rgba(204, 255, 255, 0.8),
 		rgba(255, 255, 204, 0.8),

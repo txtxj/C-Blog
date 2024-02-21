@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlogInfo: typeof import('./../../src/components/BlogInfo.vue')['default']
     CursorContainer: typeof import('./../../src/components/CursorContainer.vue')['default']
     Header: typeof import('./../../src/components/Header.vue')['default']
     MobileBar: typeof import('./../../src/components/MobileBar.vue')['default']
