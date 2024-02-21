@@ -79,6 +79,23 @@ watch(
 	},
 	{ immediate: true },
 )
+
+function getRand(min: number, max: number): number {
+	return min + Math.round(Math.random() * (max - min))
+}
+
+const skelenton = ref<{ repeat: number; width: string }[]>([])
+
+onMounted(() => {
+	skelenton.value = []
+	let length = getRand(4, 8)
+	for (let i = 0; i < length; i++) {
+		skelenton.value.push({
+			repeat: getRand(1, 3),
+			width: 'width: ' + getRand(20, 80) + '%',
+		})
+	}
+})
 </script>
 
 <template>
@@ -86,6 +103,12 @@ watch(
 		<PostHeader :post="currPost"></PostHeader>
 		<Suspense @resolve="updateArticle">
 			<component :is="Article"></component>
+			<template #fallback>
+				<n-thing v-for="k in skelenton">
+					<n-skeleton text :repeat="k.repeat" />
+					<n-skeleton text :style="k.width" />
+				</n-thing>
+			</template>
 		</Suspense>
 		<!--		<div class="md-blog m-auto text-left" v-html="data"></div>-->
 		<PostFooter :post="currPost.url"></PostFooter>
