@@ -28,7 +28,7 @@ const { isMobile } = usePhone()
 		<p>
 			Powered by
 			<a
-				href="https://github.com/txtxj"
+				href="https://github.com/txtxj/C-Blog"
 				style="color: #258fb8"
 				target="_blank"
 				data-clickable
