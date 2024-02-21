@@ -710,5 +710,10 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,jetbrains+all,node,webstorm,vs,vue,vuejs
 
 posts/*
-public/*
+public/summary.json
+public/dynamic/
 images/
+.npmrc
+.prettierignore
+.prettierrc.json
+.editorConfig

@@ -4,7 +4,7 @@
 
 一个使用 Vue3.3 的静态博客站示例，自用于 [个人博客](http://txtxj.top)
 
-参考 [TOV](https://github.com/dishait/tov-template) 的 Vite2 + Vue3 模板
+参考 [TOV](https://github.com/dishait/tov-template) 的 Vite5 + Vue3 模板
 
 部分功能与命名参考了 [Q-Blog](https://github.com/liuly0322/Q-Blog)，
 
