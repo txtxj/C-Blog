@@ -282,6 +282,7 @@ declare global {
   const useToString: typeof import('@vueuse/core')['useToString']
   const useToc: typeof import('../../src/composables/useToc')['default']
   const useToggle: typeof import('@vueuse/core')['useToggle']
+  const useTouchDrag: typeof import('../../src/composables/useTouchDrag')['default']
   const useTransition: typeof import('@vueuse/core')['useTransition']
   const useTyped: typeof import('../../src/composables/useTyped')['default']
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams']

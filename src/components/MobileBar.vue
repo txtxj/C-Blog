@@ -18,12 +18,28 @@ const mobileNavigation = {
 	'/link': TeamOutlined,
 }
 const router = useRouter()
-console.log(mobileNavigation)
+
+const { onTouchStart, onTouchEnd, onTouchMove, setPosition, dragBoxPos } =
+	useTouchDrag()
+onMounted(() => setPosition(40, 40))
 </script>
 
 <template>
-	<transition-group name="fade" tag="div" class="button-group">
-		<n-button class="float-button" style="z-index: 11" @click="handleClick">
+	<transition-group
+		name="fade"
+		tag="div"
+		class="button-group"
+		:style="`right: ${dragBoxPos.x}px; bottom: ${dragBoxPos.y}px;`"
+	>
+		<n-button
+			key="-1"
+			class="float-button"
+			style="z-index: 11"
+			@click="handleClick"
+			@touchstart="onTouchStart"
+			@touchend="onTouchEnd"
+			@touchmove="onTouchMove"
+		>
 			<template #icon>
 				<MenuOutlined />
 			</template>
@@ -68,5 +84,6 @@ console.log(mobileNavigation)
 	justify-content: center;
 	border-radius: 50%;
 	box-shadow: rgba(0, 0, 0, 0.12) 0 2px 8px 0;
+	backdrop-filter: blur(1px);
 }
 </style>

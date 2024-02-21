@@ -320,6 +320,7 @@
     "useDataClickable": true,
     "useMousePosAndEvent": true,
     "useToc": true,
-    "useBubble": true
+    "useBubble": true,
+    "useTouchDrag": true
   }
 }
