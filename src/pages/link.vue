@@ -8,6 +8,7 @@ interface Friend {
 
 import _friends from '../../assets/friends.json'
 const friends: Friend[] = _friends
+const content = ref()
 
 function imgError(params: any) {
 	params.target.style.visibility = 'hidden'
@@ -15,14 +16,14 @@ function imgError(params: any) {
 }
 
 onMounted(() => {
-	useDataClickable('.n-card')
+	useDataClickable('.n-card', content.value)
 })
 </script>
 
 <template>
 	<div class="md-blog m-auto text-left">
 		<n-divider title-placement="left">友情链接</n-divider>
-		<div class="overflow-hidden flex flex-wrap">
+		<div class="overflow-hidden flex flex-wrap" ref="content">
 			<template v-for="friend in friends" :key="friend.name">
 				<a
 					:href="friend.link"
