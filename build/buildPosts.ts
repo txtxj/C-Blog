@@ -9,7 +9,7 @@ const publicPosts = path.join('public', 'dynamic')
 
 const formatDate = (date: Date) => {
 	return date
-		.toISOString()
+		.toLocaleString()
 		.replace(/T/g, ' ')
 		.replace(/\.[\d]{3}Z/, '')
 }
