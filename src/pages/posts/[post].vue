@@ -14,10 +14,6 @@ const currPost = computed(
 		},
 )
 
-watch(currPost, () => {
-	localTitle.value = currPost.value.title
-})
-
 onMounted(() => {
 	let scrollbarContents = Array.from(
 		document.querySelectorAll('.n-scrollbar-rail'),
@@ -29,13 +25,15 @@ onMounted(() => {
 	}
 })
 
-onBeforeUnmount(() => {
-	if (enableToc) enableToc.value = false
-})
-
 const { setToc, enableToc } = useToc()
 
+onBeforeUnmount(() => {
+	enableToc.value = false
+	localTitle.value = ''
+})
+
 function updateArticle() {
+	localTitle.value = currPost.value.title
 	enableToc.value = !!currPost.value.toc
 	if (enableToc.value) {
 		setToc(Array.from(document.querySelectorAll('.md-blog h2,h3,h4')))
