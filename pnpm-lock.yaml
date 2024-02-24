@@ -138,8 +138,8 @@ devDependencies:
     specifier: ^1.1.0
     version: 1.1.0
   naive-ui:
-    specifier: ^2.37.3
-    version: 2.37.3(vue@3.3.8)
+    specifier: ^2.38.0
+    version: 2.38.0(vue@3.3.8)
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
@@ -6655,8 +6655,8 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
-  /naive-ui@2.37.3(vue@3.3.8):
-    resolution: {integrity: sha512-aUkHFXVIluSi8Me+npbcsdv1NYhVMj5t9YaruoCESlqmfqspj+R2QHEVXkTtUI1kQwVrABMCtAGq/wountqjZA==}
+  /naive-ui@2.38.0(vue@3.3.8):
+    resolution: {integrity: sha512-Sa1hPUSTaOBvFy5hBcdQ6ajGVqt59QHN4p6wcsC5stVo6JjQPnbRTUvWtNG3gAsLhCvHQBm9NXeJG5Ne1OFQ4Q==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
