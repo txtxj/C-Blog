@@ -47,6 +47,7 @@ function updateArticle() {
 }
 
 import { defineAsyncComponent } from 'vue'
+import BlogInfo from '~/components/BlogInfo.vue'
 
 let Article: any
 
@@ -62,17 +63,18 @@ let Article: any
 // 	{ immediate: true },
 // )
 
+import NotFound from '~/pages/[...notFound].vue'
+
+const notFound = ref(false)
 const modules = import.meta.glob('~/../public/dynamic/*.md')
 watch(
 	() => props.post,
 	() => {
-		if (modules[`/public/dynamic/${props.post}.md`] !== undefined) {
+		notFound.value = modules[`/public/dynamic/${props.post}.md`] === undefined
+		if (!notFound.value) {
 			Article = defineAsyncComponent(
 				modules[`/public/dynamic/${props.post}.md`] as any,
 			)
-		} else {
-			const router = useRouter()
-			router.replace('/notFound')
 		}
 	},
 	{ immediate: true },
@@ -97,19 +99,22 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="md-blog m-auto text-left">
-		<PostHeader :post="currPost"></PostHeader>
-		<Suspense @resolve="updateArticle">
-			<component :is="Article"></component>
-			<template #fallback>
-				<n-thing v-for="k in skelenton">
-					<n-skeleton text :repeat="k.repeat" />
-					<n-skeleton text :style="k.width" />
-				</n-thing>
-			</template>
-		</Suspense>
-		<!--		<div class="md-blog m-auto text-left" v-html="data"></div>-->
-		<PostFooter :post="currPost.url"></PostFooter>
+	<div>
+		<NotFound v-if="notFound" />
+		<div v-else class="md-blog m-auto text-left">
+			<PostHeader :post="currPost"></PostHeader>
+			<Suspense @resolve="updateArticle">
+				<component :is="Article"></component>
+				<template #fallback>
+					<n-thing v-for="k in skelenton">
+						<n-skeleton text :repeat="k.repeat" />
+						<n-skeleton text :style="k.width" />
+					</n-thing>
+				</template>
+			</Suspense>
+			<!--		<div class="md-blog m-auto text-left" v-html="data"></div>-->
+			<PostFooter :post="currPost.url"></PostFooter>
+		</div>
 	</div>
 </template>
 
