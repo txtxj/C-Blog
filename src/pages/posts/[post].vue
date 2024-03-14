@@ -66,14 +66,14 @@ let Article: any
 import NotFound from '~/pages/[...notFound].vue'
 
 const notFound = ref(false)
-const modules = import.meta.glob('~/../public/dynamic/*.md')
+const modules = import.meta.glob('~/posts/*.md')
 watch(
 	() => props.post,
 	() => {
-		notFound.value = modules[`/public/dynamic/${props.post}.md`] === undefined
+		notFound.value = modules[`/src/posts/${props.post}.md`] === undefined
 		if (!notFound.value) {
 			Article = defineAsyncComponent(
-				modules[`/public/dynamic/${props.post}.md`] as any,
+				modules[`/src/posts/${props.post}.md`] as any,
 			)
 		}
 	},

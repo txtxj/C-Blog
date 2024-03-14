@@ -5,8 +5,6 @@ import { PostSummary } from '~/composables/useSummary'
 
 import fm from 'front-matter'
 
-const publicPosts = path.join('public', 'dynamic')
-
 const formatDate = (date: Date) => {
 	return date
 		.toLocaleString()
@@ -22,13 +20,12 @@ async function fileExists(dir: string) {
 }
 
 async function buildPosts() {
-	if (!(await fileExists(publicPosts))) await fs.mkdir(publicPosts)
 	const posts: PostSummary[] = []
-	const files = await fs.readdir('posts')
+	const files = await fs.readdir('src/posts')
 	for (const file of files) {
 		if (file.endsWith('.md')) {
 			const blogName = path.basename(file, '.md')
-			const blogPath = path.join('posts', file)
+			const blogPath = path.join('src/posts', file)
 			const content = await fs.readFile(blogPath, { encoding: 'utf-8' })
 			const parsed = fm<PostSummary>(content)
 			posts.push({
@@ -46,13 +43,9 @@ async function buildPosts() {
 	posts.sort((a, b) => b.date.valueOf() - a.date.valueOf())
 	posts.forEach((post) => {
 		post.date = formatDate(post.date)
+		delete post.content
 	})
-	for (const post of posts) {
-		const rendered = post.content!
-		await fs.writeFile(path.join(publicPosts, `${post.url}.md`), rendered)
-	}
 
-	for (const post of posts) delete post.content
 	await fs.writeFile(path.join('public', 'summary.json'), JSON.stringify(posts))
 }
 
@@ -69,9 +62,5 @@ export default () => ({
 				event: 'posts-build',
 			})
 		}
-	},
-	async closeBundle() {
-		if (await fileExists(publicPosts))
-			await fs.rm(publicPosts, { recursive: true })
 	},
 })

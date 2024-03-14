@@ -10,5 +10,5 @@ export default defineConfig({
 		extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue', '.md'],
 	},
 	plugins: [Tov()],
-	server: { host: 'localhost', port: 1314 },
+	server: { host: 'localhost', port: 8080 },
 })
