@@ -29,6 +29,7 @@ onMounted(() => {
 					:href="friend.link"
 					target="_blank"
 					class="flex-auto text-left m-2.5"
+					style="text-decoration: none"
 				>
 					<n-card content-style="display: flex" hoverable>
 						<img
