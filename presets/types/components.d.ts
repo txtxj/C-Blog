@@ -10,6 +10,7 @@ declare module 'vue' {
     BlogInfo: typeof import('./../../src/components/BlogInfo.vue')['default']
     CursorContainer: typeof import('./../../src/components/CursorContainer.vue')['default']
     Header: typeof import('./../../src/components/Header.vue')['default']
+    ImageContainer: typeof import('./../../src/components/ImageContainer.vue')['default']
     MobileBar: typeof import('./../../src/components/MobileBar.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NButton: typeof import('naive-ui')['NButton']
