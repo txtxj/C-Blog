@@ -1,5 +1,5 @@
 <template>
-	<div class="container" style="margin: 2rem 0;">
+	<div ref="topContainer" class="container" style="margin: 2rem 0;">
 		<n-spin v-if="loading" size="large" />
 		<div class="container" v-else>
 			<n-space item-style="display: flex;" align="center">
@@ -16,11 +16,11 @@
 					秒
 				</n-checkbox>
 			</n-space>
-			<div style="font-size: 3.5vw; flex-wrap: nowrap; white-space: nowrap;">
-				<p style="display: inline-flex; align-items: center; justify-content: center; margin: 1.2rem;">
+			<div :style="{'font-size': `${fontWidth}px`, 'flex-wrap': 'nowrap', 'white-space': 'nowrap'}">
+				<p style="display: flex; align-items: center; justify-content: center; margin: 1.2rem;">
 					<span>距离</span>
 					<span style="display: inline-flex" v-html="nextYear"></span>
-					年
+					<span>年</span>
 				</p>
 				<p style="display: flex; align-items: center; justify-content: center; margin: 1.2rem;">
 					<span style="display: inline-flex;">还有</span>
@@ -41,7 +41,6 @@ const enableMinute = ref(true)
 const enableSecond = ref(true)
 const nextYearTime = ref<any>();
 const remainingTime = ref<any>();
-const styleStr = `style="max-height: 3.5vw;"`
 
 const picDict: Record<string, string> = {
 	'0': 'https://s2.loli.net/2024/12/31/RDJWBXytkGFAn69.png',
@@ -69,7 +68,7 @@ const charToLabel = (char: string) => {
 	if (src === undefined || src === null || src === '') {
 		return char;
 	}
-	return `<img src="${src}" alt="${char}" ${styleStr}>`;
+	return `<img src="${src}" alt="${char}" style="max-height: ${fontWidth.value}px;">`;
 }
 
 const nextYear = computed(() => {
@@ -122,6 +121,11 @@ const loadImages = () => {
 			loading.value = false;
 		})
 };
+
+const topContainer = ref<any>();
+const fontWidth = computed(() => {
+	return topContainer.value.offsetWidth / 16;
+})
 
 onMounted(() => {
 	loadImages();
