@@ -1,5 +1,5 @@
 <template>
-	<div class="container" style="margin: 2rem">
+	<div class="container" style="margin: 2rem;">
 		<n-spin v-if="loading" size="large" />
 		<div class="container" v-else>
 			<n-space item-style="display: flex;" align="center">
@@ -16,7 +16,7 @@
 					秒
 				</n-checkbox>
 			</n-space>
-			<div style="font-size: 3rem; flex-wrap: nowrap; white-space: nowrap;">
+			<div style="font-size: 5vw; flex-wrap: nowrap; white-space: nowrap;">
 				<p style="display: inline-flex; align-items: center; justify-content: center; margin: 1.2rem;">
 					<span>距离</span>
 					<span style="display: inline-flex" v-html="nextYearImages"></span>
@@ -41,7 +41,7 @@ const enableMinute = ref(true)
 const enableSecond = ref(true)
 const nextYear = new Date().getFullYear() + 1;
 const remainingTime = ref('');
-const styleStr = `style="height: 80px;"`
+const styleStr = `style="max-height: 5vw;"`
 
 const picDict:Record<string, string> = {
 	'0': 'https://s2.loli.net/2024/12/31/RDJWBXytkGFAn69.png',
@@ -126,5 +126,6 @@ onMounted(() => {
 	min-width: 35vh;
 	max-height: 75vh;
 	text-align: center;
+	font-family: "Lato", Helvetica, "Roboto", Arial, sans-serif;
 }
 </style>
