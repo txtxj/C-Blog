@@ -1,5 +1,5 @@
 <template>
-	<div class="container" style="margin: 2rem;">
+	<div class="container" style="margin: 2rem 0;">
 		<n-spin v-if="loading" size="large" />
 		<div class="container" v-else>
 			<n-space item-style="display: flex;" align="center">
@@ -16,10 +16,10 @@
 					秒
 				</n-checkbox>
 			</n-space>
-			<div style="font-size: 5vw; flex-wrap: nowrap; white-space: nowrap;">
+			<div style="font-size: 3.5vw; flex-wrap: nowrap; white-space: nowrap;">
 				<p style="display: inline-flex; align-items: center; justify-content: center; margin: 1.2rem;">
 					<span>距离</span>
-					<span style="display: inline-flex" v-html="nextYearImages"></span>
+					<span style="display: inline-flex" v-html="nextYear"></span>
 					年
 				</p>
 				<p style="display: flex; align-items: center; justify-content: center; margin: 1.2rem;">
@@ -32,18 +32,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import {computed, onMounted, ref} from 'vue';
 
 const loading = ref(true);
 const enableDay = ref(true)
 const enableHour = ref(true)
 const enableMinute = ref(true)
 const enableSecond = ref(true)
-const nextYear = new Date().getFullYear() + 1;
-const remainingTime = ref('');
-const styleStr = `style="max-height: 5vw;"`
+const nextYearTime = ref<any>();
+const remainingTime = ref<any>();
+const styleStr = `style="max-height: 3.5vw;"`
 
-const picDict:Record<string, string> = {
+const picDict: Record<string, string> = {
 	'0': 'https://s2.loli.net/2024/12/31/RDJWBXytkGFAn69.png',
 	'1': 'https://s2.loli.net/2024/12/31/QDIBueyWO6U2qV3.png',
 	'2': 'https://s2.loli.net/2024/12/31/VouDZlOqyP8bNa4.png',
@@ -54,67 +54,84 @@ const picDict:Record<string, string> = {
 	'7': 'https://s2.loli.net/2024/12/31/P5q4GAcjeitQsZS.png',
 	'8': 'https://s2.loli.net/2024/12/31/vQfL9TWhisqZ6o5.png',
 	'9': 'https://s2.loli.net/2024/12/31/QUFA9Tpk2ldIXBE.png',
-}
-
-const numToPic = (num: string) => {
-	return picDict[num]
 };
 
-const convertNumbersToImages = (timeParts: number) => {
+const base64Dic: Record<string, string> = {};
+
+const numToPic = (num: string) => {
+	return base64Dic[num];
+};
+
+const charToLabel = (char: string) => {
+	if (!/\d/.test(char)) {
+	}
+	const src = numToPic(char);
+	if (src === undefined || src === null || src === '') {
+		return char;
+	}
+	return `<img src="${src}" alt="${char}" ${styleStr}>`;
+}
+
+const nextYear = computed(() => {
+	remainingTime.value;
+	return nextYearTime.value.toString().split('').map(charToLabel).join('');
+});
+
+const formattedTime = computed(() => {
 	const days = Math.floor(remainingTime.value / (1000 * 60 * 60 * 24));
 	const hours = Math.floor((remainingTime.value % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	const minutes = Math.floor((remainingTime.value % (1000 * 60 * 60)) / (1000 * 60));
 	const seconds = Math.floor((remainingTime.value % (1000 * 60)) / 1000);
 
-	let timeString = ``
-	if (enableDay.value) timeString += `${days}天`
-	if (enableHour.value) timeString += `${hours}小时`
-	if (enableMinute.value) timeString += `${minutes}分`
-	if (enableSecond.value) timeString += `${seconds}秒`
-	return timeString.split('').map(char => {
-		if (/\d/.test(char)) {
-			return `<img src="${numToPic(char)}" alt="${char}" ${styleStr}>`;
-		}
-		return char;
-	}).join('');
-};
-
-const nextYearImages = computed(() => {
-	return nextYear.toString().split('').map(char => {
-		return `<img src="${numToPic(char)}" alt="${char}" ${styleStr}>`;
-	}).join('');
+	let timeString = ``;
+	if (enableDay.value) timeString += `${days}天`;
+	if (enableHour.value) timeString += `${hours}小时`;
+	if (enableMinute.value) timeString += `${minutes}分`;
+	if (enableSecond.value) timeString += `${seconds}秒`;
+	return timeString.split('').map(charToLabel).join('');
 });
 
-const formattedTime = computed(() => convertNumbersToImages(remainingTime.value));
-
 const updateRemainingTime = () => {
-	const now = new Date();
-	const nextYearDate = new Date(now.getFullYear() + 1, 0, 1);
+	const now = new Date() as any;
+	const nextYearDate = new Date(now.getFullYear() + 1, 0, 1) as any;
+	nextYearTime.value = new Date().getFullYear() + 1;
 	remainingTime.value = nextYearDate - now;
 };
 
-const loadImgs= () =>
-{
-	const imagePromises = Object.values(picDict).map((src) => {
-		return new Promise((resolve, reject) => {
-			const img = new Image();
-			img.src = src;
-			img.onload = resolve;
-			img.onerror = reject;
+const loadImages = () => {
+	const loadImageToBase64 = async (src: string) => {
+		const response = await fetch(src);
+		const blob = await response.blob();
+		const reader = new FileReader();
+		return new Promise<string>((resolve, reject) => {
+			reader.onloadend = () => resolve(reader.result as string);
+			reader.onerror = reject;
+			reader.readAsDataURL(blob);
 		});
+	};
+
+	const imagePromises = Object.entries(picDict).map(async ([key, src]) => {
+		base64Dic[key] = await loadImageToBase64(src);
 	});
 
 	Promise.all(imagePromises)
 		.then(() => {
 			loading.value = false;
 		})
-}
+		.catch(() => {
+			loading.value = false;
+		})
+};
 
 onMounted(() => {
-	loadImgs();
+	loadImages();
 	updateRemainingTime();
 	setInterval(updateRemainingTime, 1000);
 });
+
+watch(loading, () => nextTick(() => {
+	useDataClickable('.n-checkbox')
+}))
 </script>
 
 <style scoped>
